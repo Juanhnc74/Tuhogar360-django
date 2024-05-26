@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="contenedor seccion">
+    <div class="contenedor-principal">
+    <div class="contenedor-perfil">
+    <fieldset>
+        
+        <legend>Detalles del perfil</legend>
+            <div class="imagen-perfil">
+                {% if perfil.imagen_perfil %}
+                <img src="{{ perfil.imagen_perfil.url }}" alt="Imagen de perfil">
+                {% else %}
+                <!-- Mostrar una imagen de placeholder si no hay imagen de perfil -->
+                <img src="https://via.placeholder.com/150" alt="Imagen de perfil">
+                {% endif %}
+            </div>
+            <div>
+                <p><strong>Usuario:</strong> {{ perfil.username }}</p>
+                <p><strong>Nombre:</strong> {{ perfil.first_name }}</p>
+                <p><strong>Apellido:</strong> {{ perfil.last_name }}</p>
+                <p><strong>Direccion:</strong> {{ perfil.direccion }}</p>
+                <p><strong>Telefono:</strong> {{ perfil.telefono }}</p>
+                <p><strong>Fecha de Nacimiento:</strong> {{ perfil.fecha_nacimiento }}</p>
+                <p><strong>Sexo: </strong>{{ perfil.sexo }}</p>
+                <p><strong>Email: </strong> {{ perfil.email }}</p>
+                <!-- Agrega más campos según tu modelo de perfil -->
+                <a class="boton-verde" href="{% url 'editar_perfil'%}">Editar Perfil</a>
+            </div>
+    </fieldset>
+</div>
+<div class="contenedor-perfil">
+    <fieldset>
+        
+        <legend>Datos</legend>
+            <div>
+                <p><strong>Plan:</strong> {{ user.subscription.plan.product.name }}</p>
+                <p><strong>Costo: </strong>{{ user.subscription.plan.amount }} mxn</p>
+                <p><strong>Periodo: </strong>{{ user.subscription.plan.interval }}</p>
+                <p><strong>Fecha de inicio: </strong>{{ user.subscription.current_period_start }}</p>
+                <p><strong>Fecha de fin: </strong>{{ user.subscription.current_period_end }}</p>
+                <p><strong>Benficios: </strong>{{ user.subscription.plan.product.description }}</p>
+                <p><strong>Email asociado: </strong> {{ user.customer.email }}</p>
+                <p><strong>Estado de la suscripción: </strong>{{ user.subscription.status}}</p>
+            </div>
+    </fieldset>
+</div>
+</div>
+</main>
+{% endblock %}

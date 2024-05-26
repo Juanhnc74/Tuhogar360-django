@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu hogar 360°</title>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tarjetas.css' %}">
+
+</head>
+
+<body>
+    <header class="{% if request.path == '/' %} header inicio
+                   {% else %} header
+                   {% endif %}">
+        <div class="contenedor contenido-header">
+            <div class="barra">
+                <a href="{% url 'usuarios' %}">
+                    <img src="{% static 'img/logo.svg' %}" alt="Logotipo de Bienes Raices">
+                </a>
+
+                <div class="mobile-menu">
+                    <img src="{% static 'img/barras.svg' %}" alt="icono menu responsive">
+                </div>
+
+                <div class="derecha">
+                    <img class="dark-mode-boton" src="{% static 'img/dark-mode.svg' %}">
+                    <nav>            
+                        <ul>
+                            {% if user.is_superuser %}
+                            <li>
+                                <a href="{% url 'administrativos' %}">Administracion</a>
+                            </li>
+                            {% else %}
+                                {% if not user.subscription.status == 'active' or not user.is_authenticated %}
+                                    <li><a href="{% url 'pricing_page' %}">¿Quieres publicar?</a></li>
+                                {% endif %}
+                            {% endif %}
+                            <li class="dropdown">
+                                <a>TuHogar360</a>
+                                <div class="dropdown-content">
+                                    <a href="{% url 'nosotros' %}">Nosotros</a>
+                                    <a href="{% url 'anuncios' %}">Anuncios</a>
+                                    <a href="{% url 'inicioblog' %}">Blog</a>
+                                    <a href="{% url 'contacto' %}">Contacto</a>
+                                </div>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="dropdown">
+                                <a>{{ user.username }}</a>
+                                <div class="dropdown-content">
+                                    <a href="{% url 'perfil' %}"> Mi perfil</a>
+                                    {% if user.subscription.status == 'active' %}
+                                    <a href="{% url 'create_portal_session' %}"> Tu suscripcion</a>
+                                    <a href="{% url 'mis_publicaciones' username=user.username %}">Mis propiedades</a>
+                                    {% endif %}
+                                    <a href="{% url 'logout' %}">Cerrar sesión</a>  
+                                </div>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="{% url 'ingreso' %}">Ingresa</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'registro' %}">Registrate</a>
+                            </li>
+                            {% endif %}
+                            <li class="dropdown">  
+                                  
+                                <div class="dropdown-content">
+                                    <a href=""></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            
+            <!--.barra-->
+            <div>
+                {% if request.path == '/' %}
+                <h1>"Venta de Casas y Departamentos Exclusivos de Lujo"</h1>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+    <div class="footer seccion">
+        <div class="contenedor contenedor-footer">
+            <nav class="">
+                <a href="{% url 'nosotros'%}">Nosotros</a>
+                <a href="{% url 'anuncios'%}">Anuncios</a>
+                <a href="{% url 'inicioblog'%}">Blog</a>
+                <a href="{% url 'contacto'%}">Contacto</a>
+            </nav>
+        </div>
+        <p class="copyright">Todos los derechos Reservados 2023 & copy;</p>
+    </div>
+
+    <script src="{% static 'js/bundle.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

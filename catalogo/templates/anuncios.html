@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/propiedad.css'%}">
+<main class="contenedor seccion">
+    <form id="search-form" method="get">
+        {{ form.as_p }}
+        <button type="submit" class="search-button" ><img src="{% static 'img/R.png' %}" alt="Buscar"></button>
+    </form>
+    <h2>Casas y Depas en Venta</h2>
+
+    <div class="propiedades">
+        {% for propiedad in propiedades %}
+        <div class="propiedad">
+            <img src="{{ propiedad.imagen_principal.url }}" alt="Imagen de la propiedad">
+            <p class="descripcion">{{ propiedad.descripcion }}</p>
+            <p class="detalles">Precio: ${{ propiedad.precio }} | Área: {{ propiedad.area }} m²</p>
+            <a href="{% url 'detalles' propiedad.id %}" class="btn-ver-detalles">Ver Detalles</a>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; Primera</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                {% endif %}
+
+                <span class="current">
+                    Página {{ page_obj.number }} de {{ paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                    <a href="?page={{ paginator.num_pages }}">Última &raquo;</a>
+                {% endif %}
+            {% endif %}
+        </span>
+    </div>
+</main>
+{% endblock %}

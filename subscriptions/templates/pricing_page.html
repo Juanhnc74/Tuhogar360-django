@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+<stripe-pricing-table style=" 
+padding-top: 65px; /* Ajusta según sea necesario */
+padding-bottom: 150px; /* Ajusta según sea necesario */
+background-color: rgb(0, 0, 0);
+
+"
+    pricing-table-id="{{ stripe_pricing_table_id }}" 
+    publishable-key="{{ stripe_test_public_key }}"
+    client-reference-id="{{ request.user.id }}"
+>
+</stripe-pricing-table>
+{% endblock %}

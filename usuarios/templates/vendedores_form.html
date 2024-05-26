@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+{% if not user.vendedor.is_validando%}
+<main class="contenedor seccion">
+    <div class="formulario">
+        <fieldset>
+            <legend>Formulario de Vendedor</legend>
+        <div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Guardar" class="boton-verde">
+            </form>
+        </div>
+        </fieldset>
+    </div>
+</main>
+{% else %}
+<section class="imagen-contacto">
+    <h2>Gracias</h2>
+    <p>Estamos validando tu infomacion!!</p>
+    <a href="{% url 'usuarios' %}" class="boton-amarillo">Volver</a>
+</section>
+{% endif %}
+{% endblock %}

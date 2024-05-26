@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="contenedor seccion">
+    <h1>Nueva Publicación</h1>
+    <div class="formulario">
+        <fieldset>
+            <legend>Formulario de Publicación</legend>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Publicar" class="boton-verde">
+                <a href="#" class="boton-naranja" onclick="history.back(); return false;">Regresar</a>
+            </form>
+        </fieldset>
+    </div>
+</main>
+{% endblock %}

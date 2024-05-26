@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="contenedor seccion">
+    <h2>Editar Perfil</h2>
+    <div class="formulario">
+        <fieldset>
+            <legend>Información Personal</legend>
+            <div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="boton-verde" type="submit">Guardar Cambios</button>
+                </form>
+            </div>
+    </div>
+    </fieldset>
+</main>
+
+{% endblock %}

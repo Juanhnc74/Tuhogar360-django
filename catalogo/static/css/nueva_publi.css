@@ -1,0 +1,43 @@
+body {
+    font-family: Lato, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(0, 102, 255);
+    display: flex; /* Utilizamos Flexbox */
+}
+.imagen-perfil {
+    max-width: 20%;
+    height: 20%;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    flex: 0 0 auto; /* La imagen no se estira ni se reduce */
+    margin-right: 20px; /* Espacio entre la imagen y los datos */
+}
+.datos-perfil {
+    flex: 1; /* Los datos ocupan todo el espacio restante */
+}
+
+h1 {
+    color: #333;
+}
+p {
+    margin: 10px 0;
+    color: #ac2e2e;
+}
+.a {
+    color: #751c1c;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+a:hover {
+    text-decoration: underline;
+}
